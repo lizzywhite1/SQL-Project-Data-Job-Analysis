@@ -1,6 +1,6 @@
 /*
 Question: What are the top paying ML roles?
-- Identitfy top 10 highest paying remote ML jobs and company 
+- Identitfy top 10 highest paying ML jobs and company 
 - Focus on job postings with saleries (No null values)
 - Why? Highlight top-paying oppurunities for ML Engineers
 */
@@ -22,8 +22,6 @@ WHERE
     OR job_title LIKE '% ML %')
 -- Only show jobs with a salary input
     AND salary_year_avg IS NOT NULL
--- Only show remote jobs 
-    AND job_location = 'Anywhere'
 ORDER BY 
     salary_year_avg DESC
-LIMIT 100
+LIMIT 10
