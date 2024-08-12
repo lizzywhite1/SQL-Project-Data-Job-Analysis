@@ -5,23 +5,22 @@ Question: What are the top paying ML roles?
 - Why? Highlight top-paying oppurunities for ML Engineers
 */
 
+
 SELECT 
-    companies.name AS company_name,
+    companies.name AS company_name, -- Name of company
     job_title,
     job_location,
-    job_schedule_type,
+    job_schedule_type, -- Type of job schedule (e.g. full-time)
     salary_year_avg,
-    job_posted_date
+    job_posted_date -- Date the job was posted 
 FROM 
     job_postings_fact AS job_postings
--- Use company dimension table to determine company from company id
+-- Join with the company dimension table to get company details from company_id
 LEFT JOIN company_dim AS companies ON job_postings.company_id = companies.company_id
 WHERE 
--- Filtering to only show roles which contain the keywords ML or Machine Learning
-    (job_title LIKE '%Machine Learning%' 
-    OR job_title LIKE '% ML %')
--- Only show jobs with a salary input
-    AND salary_year_avg IS NOT NULL
+-- Filter to include only roles that contain the keywords "ML" or "Machine Learning"    (job_title ILIKE '%Machine Learning%' 
+    OR job_title ILIKE '% ML %')
+    AND salary_year_avg IS NOT NULL -- Exclude NULL salaries
 ORDER BY 
     salary_year_avg DESC
-LIMIT 10
+LIMIT 10; -- Limit to top 10 roles
