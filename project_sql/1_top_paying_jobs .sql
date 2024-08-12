@@ -19,6 +19,7 @@ FROM
 LEFT JOIN company_dim AS companies ON job_postings.company_id = companies.company_id
 WHERE 
 -- Filter to include only roles that contain the keywords "ML" or "Machine Learning"    (job_title ILIKE '%Machine Learning%' 
+    (job_title ILIKE '%Machine Learning%' 
     OR job_title ILIKE '% ML %')
     AND salary_year_avg IS NOT NULL -- Exclude NULL salaries
 ORDER BY 
